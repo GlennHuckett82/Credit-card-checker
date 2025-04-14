@@ -41,3 +41,67 @@ const batch = [valid1, valid2, valid3,
     mystery2, mystery3, mystery4, mystery5];
     // Add your functions below:
     
+    function validateCred(cardNumber) {
+        let sum = 0;
+        for (let i = cardNumber.length - 1; i >= 0; i--) {
+        let num = cardNumber[i];
+        if ((cardNumber.length - 1 - i) % 2 === 1) {
+        num *= 2;
+        if (num > 9) num -= 9;
+        }
+        sum += num;
+        }
+        return sum % 10 === 0;
+        }
+
+        console.log(validateCred(valid1)); // true
+        console.log(validateCred(invalid1)); // false
+        console.log(validateCred(mystery1)); // true or false depending on the number
+
+        function findInvalidCards(cardNumbers) {
+            const invalidCards = [];
+            for (let card of cardNumbers) {
+            if (!validateCred(card)) {
+            invalidCards.push(card);
+            }
+            }
+            return invalidCards;
+            }
+
+            console.log(findInvalidCards(batch)); // returns an array of invalid cards
+
+            function idInvalidCardCompanies(invalidCards) {
+                const companies = [];
+                for (let card of invalidCards) {
+                switch (card[0]) {
+                case 3:
+                if (!companies.includes('Amex')) {
+                companies.push('Amex');
+                }
+                break;
+                case 4:
+                if (!companies.includes('Visa')) {
+                companies.push('Visa');
+                }
+                break;
+                case 5:
+                if (!companies.includes('Mastercard')) {
+                companies.push('Mastercard');
+                }
+                break;
+                case 6:
+                if (!companies.includes('Discover')) {
+                companies.push('Discover');
+                }
+                break;
+                default:
+                if (!companies.includes('Company not found')) {
+                companies.push('Company not found');
+                }
+                break;
+                }
+                }
+                return companies;
+                }
+                
+                console.log(idInvalidCardCompanies(findInvalidCards(batch))); // returns an array of companies
