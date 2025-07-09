@@ -10,3 +10,7 @@ A JavaScript program that validates credit card numbers using the luhn algorithm
 
   ## Tech
   - JavaScript
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
